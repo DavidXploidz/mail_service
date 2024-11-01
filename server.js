@@ -2,9 +2,10 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const cors = require('cors'); // Importa CORS
+require('dotenv').config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT;
 app.use(cors());
 
 // Middleware para parsear datos del formulario
@@ -14,16 +15,15 @@ app.use(bodyParser.json());
 // Ruta para recibir los datos del formulario
 app.post('/send-email', (req, res) => {
     const { nombre, correo, mensaje } = req.body;
-    console.log(nombre);
 
-    // Configuración de Nodemailer para usar Gmail
+    // Configuración de Nodemailer para usar Gmail u otros
     const transporter = nodemailer.createTransport({
         host: "sandbox.smtp.mailtrap.io",
         port: 587,
         secure: false,
         auth: {
-            user: "c08588cb87cfd2",
-            pass: "0a8649b7c25480",
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
         }
     });
 
@@ -46,5 +46,5 @@ app.post('/send-email', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Servidor en funcionamiento en http://localhost:${PORT}`);
+    console.log(`Servidor en funcionamiento en puerto:${PORT}`);
 });
