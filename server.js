@@ -18,8 +18,8 @@ app.post('/send-email', (req, res) => {
 
     // Configuración de Nodemailer para usar Gmail u otros
     const transporter = nodemailer.createTransport({
-        host: "sandbox.smtp.mailtrap.io",
-        port: 587,
+        host: "smtp.gmail.com",
+        port: 465,
         secure: false,
         auth: {
             user: process.env.EMAIL_USER,
