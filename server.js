@@ -29,7 +29,7 @@ app.post('/send-email', (req, res) => {
 
     const mailOptions = {
         from: correo,
-        to: 'wonaxa5175@regishub.com',
+        to: process.env.EMAIL_USER,
         subject: `Mensaje de ${nombre}`,
         text: `Nombre: ${nombre}\nCorreo: ${correo}\nMensaje: ${mensaje}`
     };
